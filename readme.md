@@ -10,7 +10,7 @@ A simple Python script that inspects user-provided objects and displays useful d
 ---
 
 ## 🛠️ Requirements
-- Python 3.7+
+- Python 3.7.1+
 
 No external libraries are required.
 
