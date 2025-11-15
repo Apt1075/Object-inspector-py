@@ -1,53 +1,37 @@
-project:
-  name: Python Object Inspector
-  description: >
-    A simple Python script that inspects user-provided objects and displays
-    useful details like type, size, memory location, and mutability.
-  version: 1.0.0
-  author: Your Name
-  python: ">=3.7"
+name: Python Object Inspector CI
 
-features:
-  - Safely converts string input to Python objects using ast.literal_eval.
-  - Detects mutability of objects (list, dict, set, bytearray).
-  - Displays object value, type, size, memory address, and mutability.
-  - No external libraries required.
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
-usage:
-  run: "python object_inspector.py"
-  example_inputs:
-    - "[1, 2, 3]"
-    - "42"
-  example_outputs:
-    list_example: |
-      Object Inspection:
-      ----------------------------------------
-      Value    : [1, 2, 3]
-      Type     : <class 'list'>
-      Size     : 88
-      Memory   : 1505141171584
-      Mutable  : Yes
-      ----------------------------------------
-    int_example: |
-      Object Inspection:
-      ----------------------------------------
-      Value  : 42
-      Type   : <class 'int'>
-      Size   : 28
-      Mutable: No
-      ----------------------------------------
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-script:
-  filename: object_inspector.py
-  description: Core script that performs object inspection.
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-metadata:
-  license: MIT
-  created: 2025-11-15
-  tags:
-    - python
-    - object inspector
-    - ast
-    - mutability
-    - tools
-    - beginner-friendly
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: |
+          if [ -f requirements.txt ]; then
+            pip install -r requirements.txt
+          else
+            echo "No requirements.txt found, skipping installation."
+          fi
+
+      - name: Run Object Inspector (test execution)
+        run: |
+          echo "[1, 2, 3]" | python object_inspector.py
+
+      - name: Lint with flake8
+        run: |
+          pip install flake8
+          flake8 . || true
