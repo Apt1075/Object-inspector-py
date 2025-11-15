@@ -1,0 +1,53 @@
+project:
+  name: Python Object Inspector
+  description: >
+    A simple Python script that inspects user-provided objects and displays
+    useful details like type, size, memory location, and mutability.
+  version: 1.0.0
+  author: Your Name
+  python: ">=3.7"
+
+features:
+  - Safely converts string input to Python objects using ast.literal_eval.
+  - Detects mutability of objects (list, dict, set, bytearray).
+  - Displays object value, type, size, memory address, and mutability.
+  - No external libraries required.
+
+usage:
+  run: "python object_inspector.py"
+  example_inputs:
+    - "[1, 2, 3]"
+    - "42"
+  example_outputs:
+    list_example: |
+      Object Inspection:
+      ----------------------------------------
+      Value    : [1, 2, 3]
+      Type     : <class 'list'>
+      Size     : 88
+      Memory   : 1505141171584
+      Mutable  : Yes
+      ----------------------------------------
+    int_example: |
+      Object Inspection:
+      ----------------------------------------
+      Value  : 42
+      Type   : <class 'int'>
+      Size   : 28
+      Mutable: No
+      ----------------------------------------
+
+script:
+  filename: object_inspector.py
+  description: Core script that performs object inspection.
+
+metadata:
+  license: MIT
+  created: 2025-11-15
+  tags:
+    - python
+    - object inspector
+    - ast
+    - mutability
+    - tools
+    - beginner-friendly
